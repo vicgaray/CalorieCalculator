@@ -1,0 +1,217 @@
+<ToggleButton>:
+    text_size: self.size
+    halign: 'center'
+    valign: 'middle'
+    font_size: 0.15 * self.width
+    color: 0.85, 0.69, 0.55, 1
+    bold: True
+    background_color: [0.07, 0.39, 0.4, 1]
+
+<Label>:
+    halign: 'center'
+    valign: 'middle'
+    color: 0.85, 0.69, 0.55, 1
+
+<TextInput>:
+    multiline: False
+    size_hint: (None, None)
+    height: 40
+    width: 70
+    pos_hint: {'y': .2}
+    font_size: self.height - 10
+
+<AnchorLayout>:
+    anchor_x: 'center'
+    anchor_y: 'center'
+
+
+<ErrorPop>:
+    id: pop
+    size_hint: None, None
+    size: 400, 400
+    title: "Error"
+    auto_dismiss: False
+
+    BoxLayout:
+        canvas.before:
+            Color:
+                rgb: 0.17, 0.21, 0.19
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        orientation: 'vertical'
+        size: pop.size
+
+
+        Label:
+            canvas.before:
+                Color:
+                    rgb: 0.17, 0.21, 0.19
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            text: 'Error: Propertly put and select all inputs.'
+            font_size: 0.05 * self.width
+
+        AnchorLayout:
+
+            Button:
+                text: 'Return'
+                halign: 'center'
+                valign: 'middle'
+                color: 0.85, 0.69, 0.55, 1
+                bold: True
+                background_color: [0.07, 0.39, 0.4, 1] if self.state == "normal" else [0.82, 0.91, 0.89, 1]
+                size_hint: None, None
+                width: self.parent.width / 5
+                height: self.parent.height /8
+                on_press: pop.dismiss()
+
+<MyGrid>:
+    age: age
+    weight: weight
+    h: h
+
+    BoxLayout:
+        canvas.before:
+            Color:
+                rgb: 0.17, 0.21, 0.19
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        size: root.size
+        orientation: 'vertical'
+        padding: 50
+
+        BoxLayout:
+            orientation: 'horizontal'
+
+            Label:
+                canvas.before:
+                    Color:
+                        rgb: 0.17, 0.21, 0.19
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                text: 'Age:'
+                font_size: 30
+
+            TextInput:
+                id: age
+
+        BoxLayout:
+            orientation: 'horizontal'
+
+            Label:
+                canvas.before:
+                    Color:
+                        rgb: 0.17, 0.21, 0.19
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                text: 'Height(in):'
+                font_size: 30
+
+            TextInput:
+                id: h
+
+        BoxLayout:
+            orientation: 'horizontal'
+
+            Label:
+                canvas.before:
+                    Color:
+                        rgb: 0.17, 0.21, 0.19
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                text: 'Weight(lbs):'
+                font_size: 30
+
+            TextInput:
+                id: weight
+
+        BoxLayout:
+            orientation: 'horizontal'
+
+            ToggleButton:
+                text: "Sedentary"
+                group: "activity"
+                background_color: [0.07, 0.39, 0.4, 1] if self.state == "normal" else [0.82, 0.91, 0.89, 1]
+                on_press: root.set_active_level(1.2) if self.state == "down" else root.clear_act_lvl()
+
+            ToggleButton:
+                text: "Lightly Active"
+                group: "activity"
+                background_color: [0.07, 0.39, 0.4, 1] if self.state == "normal" else [0.82, 0.91, 0.89, 1]
+                on_press: root.set_active_level(1.375) if self.state == "down" else root.clear_act_lvl()
+
+            ToggleButton:
+                text: "Moderately Active"
+                group: "activity"
+                background_color: [0.07, 0.39, 0.4, 1] if self.state == "normal" else [0.82, 0.91, 0.89, 1]
+                on_press: root.set_active_level(1.55) if self.state == "down" else root.clear_act_lvl()
+
+            ToggleButton:
+                text: "Very Active"
+                group: "activity"
+                background_color: [0.07, 0.39, 0.4, 1] if self.state == "normal" else [0.82, 0.91, 0.89, 1]
+                on_press: root.set_active_level(1.725) if self.state == "down" else root.clear_act_lvl()
+
+            ToggleButton:
+                text: "Extra Active"
+                group: "activity"
+                background_color: [0.07, 0.39, 0.4, 1] if self.state == "normal" else [0.82, 0.91, 0.89, 1]
+                on_press: root.set_active_level(1.9) if self.state == "down" else root.clear_act_lvl()
+
+        BoxLayout:
+            orientation: 'horizontal'
+
+            ToggleButton:
+                text: "Aggressive cut"
+                group: "dieting"
+                on_press: root.set_diet_cal(-300)
+
+            ToggleButton:
+                text: "Light cut"
+                group: "dieting"
+                on_press: root.set_diet_cal(-100)
+
+            ToggleButton:
+                text: "Maintain"
+                group: "dieting"
+                on_press: root.set_diet_cal(0)
+
+            ToggleButton:
+                text: "Light bulk"
+                group: "dieting"
+                on_press: root.set_diet_cal(350)
+
+            ToggleButton:
+                text: "Aggressive bulk"
+                group: "dieting"
+                on_press: root.set_diet_cal(500)
+
+        BoxLayout:
+            orientation: 'horizontal'
+
+            AnchorLayout:
+
+                Button:
+                    text: 'Result'
+                    halign: 'center'
+                    valign: 'middle'
+                    color: 0.85, 0.69, 0.55, 1
+                    bold: True
+                    background_color: [0.07, 0.39, 0.4, 1] if self.state == "normal" else [0.82, 0.91, 0.89, 1]
+                    size_hint: None, None
+                    width: self.parent.width / 6
+                    height: self.parent.height /8
+                    font_size: 0.15 * self.width
+                    on_press: root.result()
+
+        BoxLayout:
+
+            Label:
+                text: root.cal
+                font_size: 0.1 * self.width
